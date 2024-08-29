@@ -8,9 +8,9 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o restapi ./server/main.go
+RUN GOOS=linux GOARCH=arm GOARM=7 go build -o restapi ./server/main.go
 
-FROM debian:trixie-20240812-slim
+FROM debian:rc-buggy-20240812
 
 ENV DEBIAN_FRONTEND=noninteractive
 

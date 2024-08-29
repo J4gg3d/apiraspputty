@@ -1,0 +1,5 @@
+caf7494d92ebc73b8d6515bd0f19c776  usr/lib/tmpfiles.d/libselinux1.conf
+a9c56a7efba7a5458eea3e2365aa7182  usr/lib/x86_64-linux-gnu/libselinux.so.1
+56c5a2b51fa9521301f996f27c1174df  usr/share/doc/libselinux1/changelog.Debian.amd64.gz
+0a778fef0b153c219c2cb8e21aadc276  usr/share/doc/libselinux1/changelog.Debian.gz
+7f9205ae629746dde0b33b7c485d268e  usr/share/doc/libselinux1/copyright
