@@ -1,0 +1,77 @@
+definitions:
+  handlers.Order:
+    properties:
+      id:
+        description: ID der Order hinzufügen
+        type: integer
+      kunde:
+        type: integer
+      kundenname:
+        type: string
+      user_id:
+        description: UserID hinzufügen
+        type: integer
+    type: object
+info:
+  contact: {}
+paths:
+  /orders:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve all orders for the authenticated user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of orders
+          schema:
+            items:
+              $ref: '#/definitions/handlers.Order'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get all orders
+      tags:
+      - orders
+  /orders/create:
+    post:
+      consumes:
+      - application/json
+      description: Create a new order in the system
+      parameters:
+      - description: Order to create
+        in: body
+        name: order
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.Order'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Order successfully created
+          schema:
+            type: string
+        "400":
+          description: Invalid input
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Create a new order
+      tags:
+      - orders
+swagger: "2.0"

@@ -1,0 +1,6 @@
+---
+services:
+ image: restapi-image
+ container_name: restapi-services
+ ports: 
+  - 9090:8080
