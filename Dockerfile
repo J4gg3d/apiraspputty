@@ -8,7 +8,8 @@ RUN go mod download
 
 COPY . .
 
-RUN GOOS=linux GOARCH=arm GOARM=7 go build -o restapi ./server/main.go
+RUN GOOS=linux GOARCH=arm go build -o restapi ./server/main.go
+#GOARM=7
 
 FROM debian:rc-buggy-20240812
 
