@@ -11,7 +11,7 @@ COPY . .
 RUN GOOS=linux GOARCH=arm go build -o restapi ./server/main.go
 #GOARM=7
 
-FROM debian:rc-buggy-20240812
+FROM debian:bookworm-20240812
 
 ENV DEBIAN_FRONTEND=noninteractive
 
