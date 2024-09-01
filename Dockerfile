@@ -1,25 +1,34 @@
-FROM golang:latest AS builder
+# Verwenden Sie ein offizielles Go-Bild als Build-Image
+FROM golang:1.20 AS builder
 
+# Arbeitsverzeichnis festlegen
 WORKDIR /app
 
+# Kopieren der go.mod und go.sum aus dem Hauptverzeichnis
 COPY go.mod go.sum ./
 
+# Herunterladen der Abhängigkeiten
 RUN go mod download
 
-COPY . .
+# Arbeitsverzeichnis auf das 'server'-Verzeichnis ändern
+WORKDIR /app/server
 
-RUN GOOS=linux GOARCH=arm go build -o restapi ./server/main.go
-#GOARM=7
+# Kopieren des gesamten 'server'-Unterverzeichnisses in das Arbeitsverzeichnis
+COPY server/ .
 
-FROM debian:bookworm-20240812
+# Die Anwendung für Linux/ARM64 bauen
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -o app .
 
-ENV DEBIAN_FRONTEND=noninteractive
+# Verwenden Sie ein schlankes Image für die endgültige Ausführung
+FROM alpine:latest  
 
-WORKDIR /app
+WORKDIR /root/
 
-COPY --from=builder /app/restapi /app/restapi
+# Kopieren Sie die gebaute Anwendung aus dem Build-Image
+COPY --from=builder /app/server/app .
 
-# Expose the application port
+# Port 8080 für die Anwendung freigeben
 EXPOSE 8080
 
-ENTRYPOINT ["/app/restapi"]
+# Starten der Anwendung
+CMD ["./app"]
