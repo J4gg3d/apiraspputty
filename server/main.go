@@ -10,6 +10,8 @@ import (
 	"restapi/server/handlers"
 	"restapi/server/middleware"
 
+	_ "restapi/server/docs" // Importieren der generierten Swagger-Dokumentation
+
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 
