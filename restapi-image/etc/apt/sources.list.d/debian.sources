@@ -1,6 +1,0 @@
-Types: deb
-# http://snapshot.debian.org/archive/debian/20240812T000000Z
-URIs: http://deb.debian.org/debian
-Suites: sid
-Components: main
-Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
